@@ -39,6 +39,7 @@ const deviceSchema = new mongoose.Schema({
   AUDIO: String,
   FINGERPRINT_SENSOR: String,
   API_LEVEL: Number, 
-  VERSION: String
+  VERSION: String,
+  tacs: Array
 });
 module.exports = mongoose.model('Device', deviceSchema);

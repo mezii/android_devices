@@ -3,7 +3,7 @@ const router = express.Router();
 const Device = require('../models/Device');
 const Version = require('../models/Version');
 const getStringBeforeDot = str => str ? (str.match(/^([^.]*)/) || [])[1] || "" : null;
-
+const randomNetwork = require("./random/randomNetwork");
 // Get a random device with merged version information
 router.get('/random', async (req, res) => {
     try {
@@ -41,7 +41,8 @@ router.get('/random', async (req, res) => {
         // Merge version data into the device
         const mergedData = {
             ...randomDevice.toObject(),
-            version
+            version,
+            "network": randomNetwork()
         };
 
         res.json(mergedData);
