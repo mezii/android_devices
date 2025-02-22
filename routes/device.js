@@ -48,9 +48,9 @@ router.get('/random', async (req, res) => {
         const TAC = tacs[Math.floor(Math.random() * tacs.length)]["Tac"];
         const aboutInfo = randomAbout(TAC.toString());
 
-        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        const geolocation = await fetchGeolocation(ip);
-        console.log(geolocation);
+        // const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        // const geolocation = await fetchGeolocation(ip);
+        // console.log(geolocation);
 
         const FIRMWARE = randomDevice.KERNEL.split("-ab")[1];
         const DISPLAY = version.id + "." + FIRMWARE;
@@ -70,7 +70,6 @@ router.get('/random', async (req, res) => {
             "network": randomNetwork(),
             TAC,
             aboutInfo,
-            geolocation,
             ...randomDevice.toObject(),
 
 
