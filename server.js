@@ -5,7 +5,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const deviceRoute = require('./routes/device');
-const seedDatabase = require('./startup/seed');
 
 
 dotenv.config();
@@ -26,7 +25,6 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => {
   console.log('MongoDB connected');
-  seedDatabase();
 })
 .catch(err => console.error('MongoDB connection error:', err));
 
