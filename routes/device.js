@@ -13,6 +13,9 @@ router.get('/seed', async (req,res) => {
     return res.send("Success seed database");
 
 });
+router.get('/test', async (req, res) => {
+    return res.send("Test endpoint");
+})
 router.get('/random', async (req, res) => {
     try {
         const { start_v, end_v } = req.query;
