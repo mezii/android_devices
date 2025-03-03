@@ -62,6 +62,13 @@ const seedDatabase = async () => {
     // Process and insert devices
     const processedData = processSeedData(filteredDevices);
     const processedData2 = processTacs(processedData);
+
+    processedData2 = processedData2.map((device) => {
+      return {
+        ...device,
+        MAIN_VERSION: parseInt(device.VERSION.split(".")[0], 10),
+      };
+    });
     await Device.insertMany(processedData2);
 
     // Clear existing versions
