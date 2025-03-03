@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const deviceSchema = new mongoose.Schema({
   MANUFACTURER: String,
@@ -38,8 +38,9 @@ const deviceSchema = new mongoose.Schema({
   NFC: String,
   AUDIO: String,
   FINGERPRINT_SENSOR: String,
-  API_LEVEL: Number, 
+  API_LEVEL: Number,
   VERSION: String,
-  tacs: Array
+  MAIN_VERSION: Number,
+  tacs: Array,
 });
-module.exports = mongoose.model('Device', deviceSchema);
+module.exports = mongoose.model("Device", deviceSchema);
