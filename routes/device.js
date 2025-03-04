@@ -9,6 +9,7 @@ const seedDatabase = require("../startup/seed");
 const randomAbout = require("./random/randomAbout");
 // Get a random device with merged version information
 const fetchGeolocation = require("./random/geolocation");
+const { getAllDevices } = require("../utils/device-resources");
 router.get("/seed", async (req, res) => {
   await seedDatabase();
   return res.send("Success seed database");
@@ -25,14 +26,22 @@ router.get("/random", async (req, res) => {
 
     const startVersion = parseInt(start_v);
     const endVersion = parseInt(end_v);
-    const versionRange = Array.from(
-      { length: endVersion - startVersion + 1 },
-      (_, i) => (i + startVersion).toString()
-    );
+    // const versionRange = Array.from(
+    //   { length: endVersion - startVersion + 1 },
+    //   (_, i) => (i + startVersion).toString()
+    // );
 
-    const filteredDevices = await Device.find({
-      MAIN_VERSION: { $gte: startVersion, $lte: endVersion },
+    let allDevices = getAllDevices();
+
+    const filteredDevices = allDevices.filter((device) => {
+      return (
+        device.MAIN_VERSION >= startVersion && device.MAIN_VERSION <= endVersion
+      );
     });
+
+    // const filteredDevices = await Device.find({
+    //   MAIN_VERSION: { $gte: startVersion, $lte: endVersion },
+    // });
     // const filteredDevices = devices.filter((device) =>
     //   versionRange.includes(getStringBeforeDot(device.VERSION))
     // );
