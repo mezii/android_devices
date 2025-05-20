@@ -54,14 +54,14 @@ const seedDatabase = async () => {
 
     let filteredDevices = seedDevices.filter(
       (device) =>
-        device.GPU_VENDOR != null ||
-        device.GPU_MODEL != null ||
+        device.GPU_VENDOR != null &&
+        device.GPU_MODEL != null &&
         device.GPU_VERSION != null
     );
 
     // Process and insert devices
     const processedData = processSeedData(filteredDevices);
-    const processedData2 = processTacs(processedData);
+    let processedData2 = processTacs(processedData);
 
     processedData2 = processedData2.map((device) => {
       return {
